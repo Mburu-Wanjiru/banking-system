@@ -74,3 +74,46 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+let arr=['a','b','c','d','e'];
+//slice method
+  const pop=arr.slice(2);//extr first 3
+  console.log(pop);
+  const pop2=arr.slice(2,4);//ext 2,3 NB:do not include last index
+  console.log(pop2);
+  const pop3=arr.slice(-2)//ext last 2
+  console.log(pop3);
+  const pop4=arr.slice(0,-2);//ext from 0 and dont include last 2
+  console.log(pop4);
+  const pop5=arr.slice()//returns same array
+  console.log(pop5);
+  console.log([...arr]);//shalow copy
+
+//Splice method
+//mutates the original array
+const pap=arr.splice(2);
+console.log(pap);
+// console.log(arr);::::it removes permanent the extracted elements in array;
+//commonly used for deletion
+arr.splice(1,2);//ext ind 1,2 and returns the rest of arr
+console.log(arr);//c,d,e
+
+//Reverse
+//mutates original array=renames the array to new
+arr=['a','b','c','d','e'];
+const arr2=['j','i','h','g','j'];
+arr2.reverse();//arranges in order
+console.log(arr2);
+
+
+//Concat
+//do not mutate original array
+const letters=arr.concat(arr2);//joins the array
+console.log(letters);
+console.log([...arr,...arr2]);//
+
+//join()
+console.log(letters.join('*'));
+
+
+
