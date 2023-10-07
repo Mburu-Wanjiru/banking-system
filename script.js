@@ -1,35 +1,32 @@
 'use strict';
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
 // BANKIST APP
 
-// Data
+// Fetched Data
 const account1 = {
-  owner: 'James Mburu',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
+  holder: 'James Mburu',
+  transactions: [80000, 45000, -4000, 300000, -65000, -58000, 700000, 1300000],
+  interest: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'Moses Mbugua',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
+  holder: 'Moses Mbugua',
+  transactions: [500000, 34000, -60000, -14000, -2510, -5000, 850000, -3000],
+  interest: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Grace Wamaitha',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
+  holder: 'Grace Wamaitha',
+  transactions: [200000, -20000, 3400, -3000, -2000, 5000, 40000, -46000],
+  interest: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Peter Kimani',
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
+  holder: 'Peter Kimani',
+  transactions: [43000, 10000, 7000, 5000, 90000],
+  interest: 1,
   pin: 4444,
 };
 
@@ -62,6 +59,67 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
+//displaying transactions
+ const displayTransactions=function(transaction){
+transaction.forEach(function(val,ind,arr){
+  const type = val>0?`deposit`: `withdrawal`;
+  const html=`
+  <div class="movements__row">
+          <div class="movements__type
+           movements__type--${type}">${ind + 1} ${type}</div>
+          <div class="movements__value">
+          ${val}</div>
+        </div>
+  `;
+  containerMovements.insertAdjacentHTML('afterbegin',html)
+});
+ };
+ displayTransactions(account2.transactions);
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////
 // LECTURES
 
