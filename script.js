@@ -89,7 +89,7 @@ transaction.forEach(function(val,ind,arr){
 
 
  
- const calcDisplayBalance = function (acc) {
+ /*const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance}€`;
 };
@@ -125,7 +125,7 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
-createUsernames(accounts);
+createUsernames(accounts);*/
 
 
 
@@ -280,6 +280,14 @@ moneySet.forEach(function(value,index,set){
   console.log(`value=${value}`)
 })
 
+/////////////////////////////////
+//  MAP METHOD IN ARRAYS
+
+const keToUs=56;
+
+movements.map(function(mov){
+  
+})
 
 
 
