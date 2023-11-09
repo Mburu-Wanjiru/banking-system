@@ -32,7 +32,7 @@ const correctedJuliaData=juliaData.slice(1,4);
 const bothArray=[...correctedJuliaData,...kateData];
     //console.log(`All dogs =${bothArray}`);
 bothArray.forEach(function(value,key,bothArray){
-        const checker=value >= 3? 'an Adult': 'a Puppy';
+        const checker=value >= 3 ? 'an Adult' : 'a Puppy';
 console.log(`Dog number ${key+1} is ${checker} and is ${value} year old. `)
     }) 
 }
@@ -40,7 +40,7 @@ console.log(`Dog number ${key+1} is ${checker} and is ${value} year old. `)
 checkDogs(juliaData,kateData);
 
 
-const checkdogs=function(dogsJulia,dogsKate){
+const checkdogs=function(dogsJulia,dogsKate){ 
 const dogsjuliacorrected=dogsJulia.slice();
 dogsjuliacorrected.splice(0,1);
 dogsjuliacorrected.splice(-2);

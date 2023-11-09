@@ -233,7 +233,7 @@ for (const movement of movements){
 
 // for each function
 
-movements.forEach(function(movement){
+movements.forEach(function(movement,i,arr){
   if(movement > 0){
     console.log(`You deposited Ksh ${movement}`);
   }else{
@@ -282,13 +282,31 @@ moneySet.forEach(function(value,index,set){
 
 /////////////////////////////////
 //  MAP METHOD IN ARRAYS
-
+//it is a transformation that that assigns an operation
+//and operates in it,returns a new array.it also loops
 const keToUs=56;
 
-movements.map(function(mov){
-  
+const iteration1=movements.map(function(mov){
+  return keToUs * mov
 })
+console.log(iteration1);
+//cleaner code
+const iteration2=movements.map(mov=>keToUs*mov);
+console.log(iteration2);
+
+// //////same implamentation
+//using for of loop
+ const newLine=[];
+ for (const news of movements){
+  newLine.push(news * keToUs);
+ }
+ console.log(newLine); 
+
+ ////husling an array 
+
+ const strLine=movements.map((mov,i,arr)=>`Movement ${i+1}:
+  you ${mov>0?'deposited':'withdrew'} ${Math.abs(mov)}`);
+  console.log(strLine);
 
 
-
-
+ 
