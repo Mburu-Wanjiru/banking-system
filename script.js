@@ -63,9 +63,9 @@ for (const [team, odd] of Object.entries(game.odds)) {
   console.log(`Odd of ${teamStr} ${odd}`);
 }
  */ 
-// BANKIST APP
+ //BANKIST APP
 
-// Fetched Data
+// //Fetched Data
 const account1 = {
   holder: 'James Mburu',
   transactions: [80000, 45000, -4000, 300000, -65000, -58000, 700000, 1300000],
@@ -140,7 +140,17 @@ transaction.forEach(function(val,ind,arr){
  };
  displayTransactions(account2.transactions);
 
-
+const createUsernames=function(accs){
+  accs.forEach(function(acc){
+    acc.username=acc.holder
+    .toLowerCase()
+    .split(' ')
+    .map(name=>name[0])
+    .join('');
+  })
+};
+createUsernames(accounts);
+console.log(accounts);
 
 
 
@@ -233,7 +243,7 @@ createUsernames(accounts);*/
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
+/*const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   [ 'GBP', 'Pound sterling'],
@@ -370,7 +380,7 @@ console.log(iteration2);
 
  const strLine=movements.map((mov,i,arr)=>`Movement ${i+1}:
   you ${mov>0?'deposited':'withdrew'} ${Math.abs(mov)}`);
-  console.log(strLine);
+  console.log(strLine);*/
    
 
 
