@@ -78,12 +78,12 @@ const account1 = {
 
    //computing usernames
   const createUsernames=function(accs){
-    accs.forEach(function(acc){
-      acc.username=acc.holder
+    accs.forEach(function(acc){//looping the array//gives the whole array of account
+      acc.username=acc.holder//computes and produce the account holder name
       .toLowerCase()
-      .split(' ')
-      .map(name=>name[0])
-      .join('');
+      .split(' ')//puts the names in array but separates it into more values
+      .map(name=>name[0])//Map method takes the first letter in that array of each element
+      .join('');//this one puts the chosen letters and puts them in form of a string
     })
   };
   createUsernames(accounts); 

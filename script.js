@@ -1,68 +1,4 @@
 'use strict';
-/* // Destructuring Objects
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'Via del Sole, 21',
-  mainIndex: 2,
-  starterIndex: 2,
-});
-
-restaurant.orderDelivery({
-  address: 'Via del Sole, 21',
-  starterIndex: 1,
-});
-
-const { name, openingHours, categories } = restaurant;
-console.log(name, openingHours, categories);
-
-const {
-  name: restaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
-console.log(restaurantName, hours, tags);
-
-// Default values
-const { menu = [], starterMenu: starters = [] } = restaurant;
-console.log(menu, starters);
-
-// Mutating variables
-let a = 111;
-let b = 999;
-const obj = { a: 23, b: 7, c: 14 };
-({ a, b } = obj);
-console.log(a, b);
-
-// Nested objects
-const {
-  fri: { open: o, close: c },
-} = openingHours;
-console.log(o, c);
-
-
-///////////////////////////////////////
-// Destructuring Arrays
-const arr = [2, 3, 4];
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
-// 1.
-for (const [i, player] of game.scored.entries())
-  console.log(`Goal ${i + 1}: ${player}`);
-
-// 2.
-const odds = Object.values(game.odds);
-let average = 0;
-for (const odd of odds) average += odd;
-average /= odds.length;
-console.log(average);
-
-// 3.
-for (const [team, odd] of Object.entries(game.odds)) {
-  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
-  console.log(`Odd of ${teamStr} ${odd}`);
-}
- */ 
  //BANKIST APP
 
 // //Fetched Data
@@ -138,7 +74,16 @@ transaction.forEach(function(val,ind,arr){
   containerMovements.insertAdjacentHTML('afterbegin',html)
 });
  };
- displayTransactions(account2.transactions);
+ displayTransactions(account1.transactions);
+
+const calcdisplaybalance=transactions=>{
+  const balance=transactions.reduce(
+    (accumilator,current)=>accumilator+current,0);
+    labelBalance.textContent=`KSH ${balance} `;
+}
+calcdisplaybalance(account1.transactions);
+
+
 
 const createUsernames=function(accs){
   accs.forEach(function(acc){
@@ -158,91 +103,9 @@ console.log(accounts);
 
 
 
-
-
-
-
- 
- /*const calcDisplayBalance = function (acc) {
-  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
-};
-
-const calcDisplaySummary = function (acc) {
-  const incomes = acc.movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
-
-  const out = acc.movements
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
-
-  const interest = acc.movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * acc.interestRate) / 100)
-    .filter((int, i, arr) => {
-      // console.log(arr);
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
-};
-
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(name => name[0])
-      .join('');
-  });
-};
-createUsernames(accounts);*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////
 // LECTURES
-
+const transactions =[200000, -20000, 3400, -3000, -2000, 5000, 40000, -46000];
 /*const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -304,7 +167,7 @@ for (const movement of movements){
     console.log(`You withdraw Ksh ${Math.abs(movement)}.`);
   }
 }
-
+ console.log(`for each function `)
 // for each function
 
 movements.forEach(function(movement,i,arr){
@@ -317,7 +180,7 @@ movements.forEach(function(movement,i,arr){
   // 1:function(450)
 });
 
-
+console.log(`accessing index using fo ofloop `)
 //accessing index using fo of loop
 // :output:Movement 1:You deposited 200
 for(const [a,b] of movements.entries()){
@@ -354,6 +217,7 @@ moneySet.forEach(function(value,index,set){
   console.log(`value=${value}`)
 })
 
+console.log(MAP METHOD IN ARRAYS);
 /////////////////////////////////
 //  MAP METHOD IN ARRAYS
 //it is a transformation that that assigns an operation
@@ -381,7 +245,56 @@ console.log(iteration2);
  const strLine=movements.map((mov,i,arr)=>`Movement ${i+1}:
   you ${mov>0?'deposited':'withdrew'} ${Math.abs(mov)}`);
   console.log(strLine);*/
-   
 
+
+
+  console.log(`filter method `)
+  //prints only elements which satisfy a certain condition
+  // which means that filter method must have a condition 
+  //which it checks before loooping. 
+
+  const withdrawals=transactions.filter(function(arr){
+    return arr<0;
+  })
+   console.log(withdrawals);
+//use for of loop
+   const withdr=[];
+   for(const arr of transactions){
+    if (arr<0)withdr.push(arr);
+   }
+   console.log(withdr);
+//////////////////////////////////////////////////
+   const deposits=transactions.filter(arr=>arr>0);
+   console.log(deposits);
+   //use for of loop
+   const depo=[];
+   for(const arr of transactions){
+    if (arr>0)depo.push(arr);
+   }
+   console.log(depo);
+
+   console.log(`reduce method in arrays`);
+   //reduce method is used to simplyfy an object to a single value.
+   const balance=transactions.reduce(function(accumilator,
+    current,i,arr){
+    return accumilator+current;
+   },0)
+   console.log(balance);
+
+   //displaying the statement
+   const statement=transactions.reduce((acc,curr,i,arr)=>{
+    const check=curr>0?'deposit':'withdarawal';
+    const state=`${i+1}:You ${check} Ksh ${Math.abs(acc)}`
+console.log(state);
+    return acc+curr;
+   });
+   console.log(statement);
+
+////displaying maximum and minimum
+const max=transactions.reduce((acc,curr)=>
+{
+  if (acc>curr)return acc
+  else return transactions;
+},transactions[0]);
 
  

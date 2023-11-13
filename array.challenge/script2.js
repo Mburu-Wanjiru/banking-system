@@ -59,3 +59,12 @@ else{
 };
 
 checkdogs([5,6,1,2,4,8,3,4], [8,5,4,1,2,3,5,1,,3,2,1]);
+
+
+const usernamefun=function(accountss){
+    accountss.forEach(function(mov,i,arr){
+        mov.user=mov.holder.toLowerCase().split(' ').map(function(arr){
+           return  arr[0];
+        })
+    })
+}
