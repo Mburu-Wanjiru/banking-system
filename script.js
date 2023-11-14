@@ -76,6 +76,7 @@ transaction.forEach(function(val,ind,arr){
  };
  displayTransactions(account1.transactions);
 
+ ////////////////////////////display balance
 const calcdisplaybalance=transactions=>{
   const balance=transactions.reduce(
     (accumilator,current)=>accumilator+current,0);
@@ -83,6 +84,37 @@ const calcdisplaybalance=transactions=>{
 }
 calcdisplaybalance(account1.transactions);
 
+//////////////////////////display the summary
+const displayInlets=function(transactions){
+  const deposits=transactions.filter(function(current,i,arr){
+    return current>0;
+  }).reduce(function(accumilator,current,i,arr){
+    return accumilator+current;
+  },0);
+labelSumIn.textContent=`${deposits}`
+
+const withdrawals=transactions.filter(function(current,i,arr){
+  return current<0;
+}).reduce(function(accumilator,current,i,arr){
+const sum=accumilator+current;
+  return sum; 
+},0);
+labelSumOut.textContent=`${Math.abs(withdrawals)}`
+
+const interest=transactions.filter(function(current,i,arr){
+  return current>0;
+}).map(function(current,i,arr){
+  return current * 1.2/100;
+}).filter((current,i,arr)=>{ 
+  console.log(arr) 
+  return current>=5000 }).reduce(function(accumilator,current,i,arr){
+  return accumilator+current; 
+},0);
+labelSumInterest.textContent=`${interest}`
+};
+displayInlets(account1.transactions);
+
+////////////////////
 
 
 const createUsernames=function(accs){
@@ -298,3 +330,19 @@ const max=transactions.reduce((acc,curr)=>
 },transactions[0]);
 
  
+
+//chaining the deposits,convertion of currency,differentiating the deposits
+const fixed=12.34;
+const pipeline=transactions.filter(current=>current>0).map(function(current,i,arr){
+  return current*fixed;
+}).reduce(function(accumilator,current,i,arr){
+  return accumilator+current;
+},0)
+console.log(pipeline);
+
+console.log(`..........find method,..............`);
+//used to retrieve elements having being given a condition and also accepts callback function
+
+console.log(accounts);
+
+
