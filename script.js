@@ -342,7 +342,14 @@ console.log(pipeline);
 
 console.log(`..........find method,..............`);
 //used to retrieve elements having being given a condition and also accepts callback function
-
+//retrieving accounts
 console.log(accounts);
+const account=accounts.find(function(current,i,obj){
+  return current.holder===`James Mburu`;
+})
+console.log(account);
 
-
+//////same implemena
+for (const jim of Objects(entries)){
+  console.log(jim);
+}
