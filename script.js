@@ -74,7 +74,7 @@ transaction.forEach(function(val,ind,arr){
   containerMovements.insertAdjacentHTML('afterbegin',html)
 });
  };
- displayTransactions(account1.transactions);
+//  displayTransactions(account1.transactions);
 
  ////////////////////////////display balance
 const calcdisplaybalance=transactions=>{
@@ -82,18 +82,18 @@ const calcdisplaybalance=transactions=>{
     (accumilator,current)=>accumilator+current,0);
     labelBalance.textContent=`KSH ${balance} `;
 }
-calcdisplaybalance(account1.transactions);
+// calcdisplaybalance(account1.transactions);
 
 //////////////////////////display the summary
-const displayInlets=function(transactions){
-  const deposits=transactions.filter(function(current,i,arr){
+const displayInlets=function(acc){
+  const deposits=acc.transactions.filter(function(current,i,arr){
     return current>0;
   }).reduce(function(accumilator,current,i,arr){
     return accumilator+current;
   },0);
 labelSumIn.textContent=`${deposits}`
 
-const withdrawals=transactions.filter(function(current,i,arr){
+const withdrawals=acc.transactions.filter(function(current,i,arr){
   return current<0;
 }).reduce(function(accumilator,current,i,arr){
 const sum=accumilator+current;
@@ -101,10 +101,10 @@ const sum=accumilator+current;
 },0);
 labelSumOut.textContent=`${Math.abs(withdrawals)}`
 
-const interest=transactions.filter(function(current,i,arr){
+const interest=acc.transactions.filter(function(current,i,arr){
   return current>0;
 }).map(function(current,i,arr){
-  return current * 1.2/100;
+  return current * currentAccount.interest/100;
 }).filter((current,i,arr)=>{ 
   console.log(arr) 
   return current>=5000 }).reduce(function(accumilator,current,i,arr){
@@ -112,7 +112,7 @@ const interest=transactions.filter(function(current,i,arr){
 },0);
 labelSumInterest.textContent=`${interest}`
 };
-displayInlets(account1.transactions);
+// displayInlets(account1.transactions);
 
 ////////////////////
 
@@ -129,6 +129,37 @@ const createUsernames=function(accs){
 createUsernames(accounts);
 console.log(accounts);
 
+//implementing login
+//event handler
+let currentAccount;
+const login=btnLogin.addEventListener('click',function(event){
+  event.preventDefault();//avoids re loading
+  // check the login
+  currentAccount=accounts.find(function(acc){
+   return acc.username===inputLoginUsername.value;
+  });
+    
+    if (currentAccount ?.pin===Number(inputLoginPin.value)){
+      //display UI
+      labelWelcome.textContent=`Welcome Back, ${currentAccount.holder.split(' ')[0]}`;
+      containerApp.style.opacity=100;
+      //trigering focus
+      inputLoginPin.blur();
+      //clear imputs
+      inputLoginUsername.value=inputLoginPin.value='';
+      //displaying movement
+      displayTransactions(currentAccount.transactions);
+      //displaying balance
+      calcdisplaybalance(currentAccount.transactions);
+      //displaying summary
+      displayInlets(currentAccount);
+
+    }
+
+  
+
+   
+});
 
 
 
