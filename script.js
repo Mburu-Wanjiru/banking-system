@@ -77,21 +77,23 @@ transaction.forEach(function(val,ind,arr){
 //  displayTransactions(account1.transactions);
 
  ////////////////////////////display balance
-const calcdisplaybalance=transactions=>{
-  const balance=transactions.reduce(
+const calcdisplaybalance=function(acc){
+   acc.balance=acc.transactions.reduce(
     (accumilator,current)=>accumilator+current,0);
-    labelBalance.textContent=`KSH ${balance} `;
-}
+    labelBalance.textContent=`KSH ${acc.balance} `;
+};
 // calcdisplaybalance(account1.transactions);
 
 //////////////////////////display the summary
 const displayInlets=function(acc){
-  const deposits=acc.transactions.filter(function(current,i,arr){
+  const deposits=acc.transactions.filter(function(current){
     return current>0;
   }).reduce(function(accumilator,current,i,arr){
     return accumilator+current;
   },0);
 labelSumIn.textContent=`${deposits}`
+
+
 
 const withdrawals=acc.transactions.filter(function(current,i,arr){
   return current<0;
@@ -101,13 +103,15 @@ const sum=accumilator+current;
 },0);
 labelSumOut.textContent=`${Math.abs(withdrawals)}`
 
+
+
 const interest=acc.transactions.filter(function(current,i,arr){
   return current>0;
 }).map(function(current,i,arr){
-  return current * currentAccount.interest/100;
+  return (current * acc.interest)/100;
 }).filter((current,i,arr)=>{ 
   console.log(arr) 
-  return current>=5000 }).reduce(function(accumilator,current,i,arr){
+  return current>=1 }).reduce(function(accumilator,current,i,arr){
   return accumilator+current; 
 },0);
 labelSumInterest.textContent=`${interest}`
@@ -129,7 +133,17 @@ const createUsernames=function(accs){
 createUsernames(accounts);
 console.log(accounts);
 
+const updateUi=function(acc){
+  //displaying movement
+  displayTransactions(acc.transactions);
+  //displaying balance
+  calcdisplaybalance(acc);
+  //displaying summary
+  displayInlets(acc);
+
+}
 //implementing login
+
 //event handler
 let currentAccount;
 const login=btnLogin.addEventListener('click',function(event){
@@ -143,23 +157,53 @@ const login=btnLogin.addEventListener('click',function(event){
       //display UI
       labelWelcome.textContent=`Welcome Back, ${currentAccount.holder.split(' ')[0]}`;
       containerApp.style.opacity=100;
+
+       //clear imputs
+       inputLoginUsername.value=inputLoginPin.value='';
       //trigering focus
       inputLoginPin.blur();
-      //clear imputs
-      inputLoginUsername.value=inputLoginPin.value='';
-      //displaying movement
-      displayTransactions(currentAccount.transactions);
-      //displaying balance
-      calcdisplaybalance(currentAccount.transactions);
-      //displaying summary
-      displayInlets(currentAccount);
 
+      updateUi(currentAccount);
+     
+      // //displaying movement
+      // displayTransactions(currentAccount.transactions);
+      // //displaying balance
+      // calcdisplaybalance(currentAccount);
+      // //displaying summary
+      // displayInlets(currentAccount);
+      // updateUi(currentAccount);
     }
 
   
 
    
 });
+
+
+//USER TRANSFER MONEY
+btnTransfer.addEventListener('click',function(event){
+// set default
+event.preventDefault();
+const Amount=Number (inputTransferAmount.value);
+const receiverAcc=accounts.find(function(acc){
+  acc.username===inputTransferTo.value;
+})
+updateUi(currentAccount);
+inputTransferTo.value=inputTransferAmount.value='';
+if(Amount > 0 && 
+  currentAccount.balance>= Amount &&
+   receiverAcc?.username!==currentAccount.username)
+{
+
+  // Doing the transfer
+currentAccount.transaction.push(-Amount);
+receiverAcc.transactions.push(Amount);
+
+ // Update UI
+updateUi(currentAccount);
+}
+}
+)
 
 
 
