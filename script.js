@@ -181,29 +181,29 @@ const login=btnLogin.addEventListener('click',function(event){
 
 
 //USER TRANSFER MONEY
-btnTransfer.addEventListener('click',function(event){
+const trasfer=btnTransfer.addEventListener('click',function(event){
 // set default
 event.preventDefault();
-const Amount=Number (inputTransferAmount.value);
-const receiverAcc=accounts.find(function(acc){
-  acc.username===inputTransferTo.value;
-})
-updateUi(currentAccount);
+const amount=Number (inputTransferAmount.value);
+const receiverAcc=accounts.find(acc=>
+  acc.username===inputTransferTo.value
+);
+
 inputTransferTo.value=inputTransferAmount.value='';
-if(Amount > 0 && 
-  currentAccount.balance>= Amount &&
+if(amount > 0 && receiverAcc &&
+  currentAccount.balance>= amount &&
    receiverAcc?.username!==currentAccount.username)
 {
 
   // Doing the transfer
-currentAccount.transaction.push(-Amount);
-receiverAcc.transactions.push(Amount);
+currentAccount.transactions.push(-amount);
+receiverAcc.transactions.push(amount);
 
  // Update UI
-updateUi(currentAccount);
+ updateUi(currentAccount);
 }
 }
-)
+);
 
 
 
