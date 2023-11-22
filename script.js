@@ -180,6 +180,9 @@ const login=btnLogin.addEventListener('click',function(event){
 });
 
 
+
+
+
 //USER TRANSFER MONEY
 const trasfer=btnTransfer.addEventListener('click',function(event){
 // set default
@@ -205,7 +208,43 @@ receiverAcc.transactions.push(amount);
 }
 );
 
+/////////////////////////////////////
+//deleting the account
 
+btnClose.addEventListener('click',function(event){
+  event.preventDefault();
+   
+  if( inputCloseUsername===currentAccount.username && Number(inputClosePin)===currentAccount.pin){
+    const index=accounts.findIndex(acc=>
+       acc.username===currentAccount.username
+    
+      
+    );
+    //hide inputs
+    inputCloseUsername=inputClosePin='';
+    //deleting
+    account.splice(index,1);
+    //hide imputs
+    
+    //hide ui
+    containerApp.style.opacity=0;
+
+
+
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+/*
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -237,7 +276,7 @@ btnSort.addEventListener('click', function (e) {
 });
 
 
-
+*/
 /////////////////////////////////////////////////
 // LECTURES
 const transactions =[200000, -20000, 3400, -3000, -2000, 5000, 40000, -46000];
@@ -459,7 +498,7 @@ for (const jim of Objects(entries)){
 
 
 
-/////////////////////////////////////////////////////
+/*////////////////////////////////////////////////////
 // Example
 const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
@@ -500,4 +539,4 @@ console.log(i, j, k);
 // Default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
-
+*/
